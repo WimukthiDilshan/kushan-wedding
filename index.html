@@ -580,7 +580,8 @@ const observer=new IntersectionObserver((entries)=>{
 revealEls.forEach(el=>observer.observe(el));
 
 /* Countdown */
-const wedding=new Date("July 31, 2026 18:00:00").getTime();
+// Fixed to Sri Lanka time (UTC+05:30) so countdown is correct on every device.
+const wedding=new Date("2026-07-31T18:00:00+05:30").getTime();
 setInterval(()=>{
   const now=new Date().getTime();
   const gap=wedding-now;
