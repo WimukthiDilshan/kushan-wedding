@@ -1,0 +1,633 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Kushan & Oshika | Our Wedding</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+<style>
+*{margin:0;padding:0;box-sizing:border-box;scroll-behavior:smooth;}
+
+:root{
+  --bg:#f4eee6;
+  --bg-2:#efe5d8;
+  --surface:rgba(255,250,244,.82);
+  --surface-strong:#fffaf4;
+  --text:#2d2421;
+  --muted:#6e615b;
+  --accent:#b78a46;
+  --accent-dark:#86612a;
+  --accent-soft:#ead7b4;
+  --rose:#8d6271;
+  --rose-soft:#eadfdc;
+  --border:rgba(119,89,52,.14);
+  --shadow:0 24px 70px rgba(53,36,18,.12);
+}
+
+html{background:radial-gradient(circle at top, #fff8f0 0%, var(--bg) 42%, var(--bg-2) 100%);}
+
+body{
+  font-family:Poppins,sans-serif;
+  background:
+    radial-gradient(circle at 15% 20%, rgba(183,138,70,.10), transparent 28%),
+    radial-gradient(circle at 85% 10%, rgba(141,98,113,.10), transparent 24%),
+    linear-gradient(180deg, #fffaf4 0%, var(--bg) 45%, #f0e6da 100%);
+  overflow-x:hidden;
+  color:var(--text);
+  min-height:100vh;
+}
+
+body::before,
+body::after{
+  content:'';
+  position:fixed;
+  inset:auto;
+  width:28rem;
+  height:28rem;
+  border-radius:50%;
+  pointer-events:none;
+  filter:blur(90px);
+  opacity:.34;
+  z-index:0;
+}
+
+body::before{top:-8rem;right:-10rem;background:rgba(183,138,70,.22);}
+body::after{bottom:-10rem;left:-10rem;background:rgba(141,98,113,.18);}
+
+body > *{position:relative;z-index:1;}
+
+/* Preloader */
+#preloader{
+  position:fixed;inset:0;
+  background:linear-gradient(135deg,#fffaf4,#f4ebdf);
+  display:flex;align-items:center;justify-content:center;
+  z-index:10000;transition:opacity .6s ease, visibility .6s ease;
+}
+#preloader.hide{opacity:0;visibility:hidden;}
+.loader-heart{
+  font-family:'Great Vibes',cursive;
+  font-size:54px;color:var(--accent);
+  animation:pulse 1s ease-in-out infinite;
+  text-shadow:0 12px 30px rgba(183,138,70,.24);
+}
+@keyframes pulse{0%,100%{transform:scale(1);}50%{transform:scale(1.18);}}
+
+/* Nav */
+nav{
+  position:fixed;top:0;left:50%;transform:translateX(-50%);
+  width:min(960px,calc(100% - 24px));
+  display:flex;justify-content:center;gap:30px;flex-wrap:wrap;
+  padding:16px 22px;margin-top:14px;z-index:900;
+  background:rgba(255,250,244,.18);
+  border:1px solid rgba(255,255,255,.35);
+  backdrop-filter:blur(16px);
+  border-radius:999px;
+  box-shadow:0 18px 40px rgba(54,37,15,.08);
+  transition:.35s ease;
+  font-size:13px;letter-spacing:1.2px;
+}
+nav.scrolled{
+  background:rgba(255,250,244,.9);
+  box-shadow:0 18px 50px rgba(54,37,15,.14);
+}
+nav a{
+  color:var(--text);text-decoration:none;
+  font-weight:500;position:relative;
+  transition:.3s;
+}
+nav a:hover{color:var(--accent-dark);}
+nav a::after{
+  content:'';position:absolute;bottom:-6px;left:0;
+  width:0;height:2px;background:var(--accent);
+  transition:.3s;
+}
+nav a:hover::after{width:100%;}
+
+/* Music toggle */
+.music-btn{
+  position:fixed;bottom:25px;right:25px;z-index:950;
+  width:58px;height:58px;border-radius:50%;
+  background:linear-gradient(135deg,var(--accent),var(--accent-dark));color:white;
+  display:flex;align-items:center;justify-content:center;
+  font-size:22px;cursor:pointer;border:none;
+  box-shadow:0 18px 35px rgba(183,138,70,.28);
+  transition:.3s;
+}
+.music-btn:hover{transform:translateY(-2px) scale(1.06);}
+.music-btn.spinning{animation:spin 3s linear infinite;}
+@keyframes spin{from{transform:rotate(0);}to{transform:rotate(360deg);}}
+
+/* Hero */
+.hero{
+  min-height:100vh;position:relative;
+  background:
+    linear-gradient(135deg, rgba(28,20,17,.68), rgba(57,38,23,.46)),
+    url("https://images.unsplash.com/photo-1511285560929-80b456fea0bc?auto=format&fit=crop&w=1600&q=80") fixed center/cover;
+  display:flex;align-items:center;justify-content:center;
+  text-align:center;color:white;padding:20px;
+}
+.hero::after{
+  content:'';position:absolute;inset:0;
+  background:radial-gradient(circle at center, rgba(255,255,255,.08), transparent 55%);
+  pointer-events:none;
+}
+.hero-content{
+  animation:fadeUp 1.1s ease both;
+  max-width:900px;
+  padding:42px 34px;
+  border-radius:28px;
+  background:linear-gradient(180deg, rgba(255,250,244,.10), rgba(255,250,244,.03));
+  border:1px solid rgba(255,255,255,.22);
+  backdrop-filter:blur(10px);
+  box-shadow:0 20px 60px rgba(0,0,0,.16);
+  position:relative;
+  z-index:1;
+}
+@keyframes fadeUp{from{opacity:0;transform:translateY(40px);}to{opacity:1;transform:translateY(0);}}
+.hero .pre-label{
+  letter-spacing:4px;font-size:12px;text-transform:uppercase;
+  color:#f1d9b0;margin-bottom:12px;
+}
+.hero h1{font-family:'Great Vibes',cursive;font-size:clamp(4rem,11vw,7rem);line-height:.95;}
+.hero .amp{color:#f3d29c;}
+.hero h2{font-size:clamp(1.1rem,2vw,1.6rem);margin:18px 0 14px;font-weight:300;letter-spacing:3px;text-transform:uppercase;}
+.hero p{font-size:15px;opacity:.9;letter-spacing:.4px;}
+.scroll-cue{
+  position:absolute;bottom:30px;left:50%;transform:translateX(-50%);
+  color:white;font-size:12px;display:flex;flex-direction:column;align-items:center;gap:8px;letter-spacing:2px;text-transform:uppercase;
+  z-index:1;
+}
+.scroll-cue .line{width:1px;height:32px;background:white;animation:scroll-pulse 1.6s ease-in-out infinite;}
+@keyframes scroll-pulse{0%{opacity:0;transform:scaleY(0);}50%{opacity:1;transform:scaleY(1);}100%{opacity:0;transform:scaleY(0);transform-origin:top;}}
+
+/* Floating hearts */
+.hearts{position:fixed;top:0;left:0;width:100%;height:100%;pointer-events:none;overflow:hidden;z-index:998;}
+.heart{position:absolute;color:var(--accent);font-size:20px;animation:float 10s linear infinite;opacity:.45;}
+@keyframes float{0%{transform:translateY(100vh) rotate(0);opacity:0;}15%{opacity:.55;}100%{transform:translateY(-120vh) rotate(360deg);opacity:0;}}
+
+/* Section generic */
+section{
+  padding:110px 8%;text-align:center;position:relative;
+  background:linear-gradient(180deg, rgba(255,255,255,.18), rgba(255,255,255,0));
+}
+.section-label{
+  text-transform:uppercase;letter-spacing:4px;font-size:11px;color:var(--accent);margin-bottom:8px;
+}
+.section-title{
+  font-size:clamp(2.5rem,5vw,4.5rem);font-family:'Great Vibes';color:var(--rose);margin-bottom:12px;
+}
+.section-sub{max-width:660px;margin:0 auto 52px;color:var(--muted);font-size:15px;line-height:1.9;}
+
+.reveal{opacity:0;transform:translateY(32px);transition:opacity .8s ease, transform .8s ease;}
+.reveal.visible{opacity:1;transform:translateY(0);}
+
+/* Couple */
+.couple{display:flex;justify-content:center;gap:60px;flex-wrap:wrap;margin-top:24px;}
+.person{max-width:280px;}
+.person img{
+  width:200px;height:200px;border-radius:50%;object-fit:cover;
+  border:6px solid rgba(255,255,255,.78);box-shadow:0 18px 34px rgba(53,36,18,.16);
+}
+.person h3{font-family:'Playfair Display';font-size:26px;margin:18px 0 6px;color:var(--accent-dark);}
+.person p{color:var(--muted);font-size:14px;line-height:1.75;}
+.heart-divider{font-size:30px;color:var(--accent);align-self:center;text-shadow:0 8px 24px rgba(183,138,70,.26);}
+
+/* Countdown */
+.countdown{display:flex;justify-content:center;gap:22px;flex-wrap:wrap;}
+.box{
+  background:var(--surface);padding:26px 20px;border-radius:22px;
+  box-shadow:var(--shadow);width:132px;
+  border:1px solid var(--border);
+  backdrop-filter:blur(10px);
+}
+.box h1{color:var(--accent-dark);font-size:42px;font-family:'Playfair Display';}
+.box p{text-transform:uppercase;font-size:11px;letter-spacing:1.6px;color:var(--muted);margin-top:6px;}
+
+/* Story timeline */
+.timeline{max-width:720px;margin:0 auto;text-align:left;position:relative;}
+.timeline::before{
+  content:'';position:absolute;left:24px;top:10px;bottom:10px;width:2px;
+  background:linear-gradient(var(--accent-soft),var(--accent),var(--accent-soft));
+}
+.t-item{position:relative;padding:0 0 50px 70px;}
+.t-item:last-child{padding-bottom:0;}
+.t-dot{
+  position:absolute;left:14px;top:0;width:24px;height:24px;border-radius:50%;
+  background:var(--accent);border:4px solid #f7efe2;
+  box-shadow:0 0 0 6px rgba(183,138,70,.08);
+}
+.t-item .date{color:var(--accent-dark);font-size:12px;letter-spacing:1px;text-transform:uppercase;font-weight:600;}
+.t-item h3{font-family:'Playfair Display';font-size:22px;margin:6px 0;color:var(--text);}
+.t-item p{color:var(--muted);font-size:14px;line-height:1.8;}
+
+.quote{font-size:clamp(1.7rem,3vw,2.7rem);font-family:'Great Vibes';color:var(--rose);margin-top:42px;}
+
+/* Gallery */
+.gallery{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:20px;}
+.gallery figure{position:relative;overflow:hidden;border-radius:22px;cursor:pointer;box-shadow:var(--shadow);}
+.gallery img{width:100%;height:300px;object-fit:cover;display:block;transition:.55s;}
+.gallery figure:hover img{transform:scale(1.08);}
+.gallery figcaption{
+  position:absolute;inset:auto 0 0 0;padding:18px 16px 16px;
+  background:linear-gradient(transparent,rgba(12,8,6,.72));
+  color:white;font-size:13px;opacity:0;transition:.35s;text-align:left;
+}
+.gallery figure:hover figcaption{opacity:1;}
+
+/* Lightbox */
+.lightbox{
+  position:fixed;inset:0;background:rgba(16,12,10,.92);z-index:5000;
+  display:none;align-items:center;justify-content:center;padding:20px;
+}
+.lightbox.active{display:flex;}
+.lightbox img{max-width:90%;max-height:85vh;border-radius:14px;box-shadow:0 0 60px rgba(0,0,0,.5);}
+.lightbox-close{position:absolute;top:25px;right:35px;color:white;font-size:34px;cursor:pointer;}
+.lightbox-nav{position:absolute;top:50%;transform:translateY(-50%);color:white;font-size:40px;cursor:pointer;padding:10px;user-select:none;}
+.lightbox-nav.prev{left:20px;}
+.lightbox-nav.next{right:20px;}
+
+/* Card / details */
+.card{
+  background:linear-gradient(180deg, rgba(255,255,255,.86), rgba(255,251,247,.94));padding:42px;border-radius:28px;
+  box-shadow:var(--shadow);max-width:850px;margin:0 auto;
+  border:1px solid rgba(183,138,70,.12);
+  backdrop-filter:blur(12px);
+}
+.card h2{font-family:'Playfair Display';font-size:28px;color:var(--text);}
+.details-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:24px;margin-top:30px;text-align:left;}
+.detail-box{
+  background:linear-gradient(180deg, #fffaf4, #f6eee4);padding:28px;border-radius:20px;
+  border:1px solid rgba(183,138,70,.12);
+  box-shadow:0 12px 28px rgba(53,36,18,.06);
+}
+.detail-box .icon{font-size:30px;margin-bottom:10px;}
+.detail-box h3{font-family:'Playfair Display';color:var(--accent-dark);margin-bottom:8px;}
+.detail-box p{font-size:14px;color:var(--muted);line-height:1.75;}
+
+.btn{
+  display:inline-flex;align-items:center;justify-content:center;padding:15px 38px;
+  background:linear-gradient(135deg,var(--accent),var(--accent-dark));
+  color:white;text-decoration:none;border-radius:999px;margin-top:25px;
+  transition:.3s;font-size:14px;letter-spacing:.6px;border:none;cursor:pointer;
+  box-shadow:0 14px 28px rgba(183,138,70,.22);
+}
+.btn:hover{transform:translateY(-3px);box-shadow:0 20px 35px rgba(183,138,70,.28);}
+.btn.outline{background:transparent;border:2px solid var(--accent);color:var(--accent-dark);box-shadow:none;}
+.btn.outline:hover{background:var(--accent);color:white;}
+
+/* Wedding party */
+.party-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:30px;max-width:900px;margin:0 auto;}
+.party-grid img{width:120px;height:120px;border-radius:50%;object-fit:cover;border:4px solid rgba(255,255,255,.78);}
+.party-grid h4{margin-top:14px;font-family:'Playfair Display';color:var(--accent-dark);}
+.party-grid p{font-size:13px;color:var(--muted);}
+
+/* RSVP styles removed */
+
+/* FAQ */
+.faq{max-width:760px;margin:0 auto;text-align:left;}
+.faq-item{border-bottom:1px solid rgba(183,138,70,.16);padding:18px 0;}
+.faq-q{
+  display:flex;justify-content:space-between;align-items:center;
+  cursor:pointer;font-weight:500;color:var(--text);font-size:16px;
+}
+.faq-q .plus{color:var(--accent);font-size:22px;transition:.3s;}
+.faq-item.open .plus{transform:rotate(45deg);}
+.faq-a{max-height:0;overflow:hidden;transition:.35s ease;font-size:14px;color:var(--muted);line-height:1.85;}
+.faq-item.open .faq-a{max-height:200px;padding-top:12px;}
+
+/* Map */
+.map-wrap{max-width:900px;margin:0 auto;border-radius:24px;overflow:hidden;box-shadow:var(--shadow);border:1px solid rgba(183,138,70,.12);}
+.map-wrap iframe{width:100%;height:380px;border:0;display:block;}
+
+/* Footer */
+footer{
+  padding:66px 20px 32px;
+  background:linear-gradient(135deg,#2f231a,#1b1410 65%, #4a3626);
+  color:white;text-align:center;
+}
+footer .foot-names{font-family:'Great Vibes';font-size:38px;margin-bottom:10px;}
+footer .foot-sub{opacity:.82;font-size:13px;letter-spacing:2px;}
+footer .copyright{opacity:.62;font-size:12px;margin-top:25px;}
+
+/* Mobile */
+@media(max-width:768px){
+  nav{gap:14px;font-size:11px;}
+  .hero h1{font-size:clamp(3.1rem,16vw,4.8rem);}
+  .hero h2{font-size:15px;letter-spacing:2px;}
+  .section-title{font-size:clamp(2.2rem,10vw,3.4rem);}
+  .gallery img{height:220px;}
+  .box{width:100px;padding:18px 12px;}
+  .box h1{font-size:30px;}
+  .couple{gap:20px;}
+  .heart-divider{display:none;}
+  section{padding:74px 6%;}
+  .hero-content{padding:30px 22px;}
+  .card{padding:28px 20px;}
+}
+</style>
+</head>
+
+<body>
+
+<div id="preloader"><div class="loader-heart">❤</div></div>
+<div class="hearts"></div>
+
+<nav id="navbar">
+  <a href="#hero">Home</a>
+  <a href="#story">Story</a>
+  <a href="#gallery">Gallery</a>
+  <a href="#details">Details</a>
+  <a href="#faq">FAQ</a>
+</nav>
+
+<button class="music-btn" id="musicBtn" title="Play music">🎵</button>
+<audio id="bgMusic" loop>
+  <source src="images/music.m4a" type="audio/mp4">
+</audio>
+
+<!-- HERO -->
+<section class="hero" id="hero">
+  <div class="hero-content">
+    <p class="pre-label">Save the Date</p>
+    <h1>Kushan <span class="amp">&</span> Oshika</h1>
+    <h2>Are Getting Married</h2>
+    <p>Friday, July 31, 2026 · Ligness Green Odyssey</p>
+    <a href="#details" class="btn">View Details</a>
+  </div>
+  <div class="scroll-cue"><span class="line"></span>Scroll</div>
+</section>
+
+<!-- COUNTDOWN -->
+<section id="countdown">
+  <p class="section-label reveal">The Big Day</p>
+  <h2 class="section-title reveal">Counting Down</h2>
+  <p class="section-sub reveal">Every second brings us closer to forever.</p>
+  <div class="countdown reveal">
+    <div class="box"><h1 id="days">0</h1><p>Days</p></div>
+    <div class="box"><h1 id="hours">0</h1><p>Hours</p></div>
+    <div class="box"><h1 id="minutes">0</h1><p>Minutes</p></div>
+    <div class="box"><h1 id="seconds">0</h1><p>Seconds</p></div>
+  </div>
+</section>
+
+<!-- COUPLE -->
+<section id="couple">
+  <p class="section-label reveal">Meet The</p>
+  <h2 class="section-title reveal">Bride & Groom</h2>
+  <div class="couple reveal">
+    <div class="person">
+      <img src="images/kushan.jpg" alt="Groom">
+      <h3>Kushan</h3>
+      <p>The one with the terrible puns and the biggest heart. Loves hiking, coffee, and saying yes to every adventure Oshika plans.</p>
+    </div>
+    <div class="heart-divider">❤</div>
+    <div class="person">
+      <img src="images/oshika.jpg" alt="Bride">
+      <h3>Oshika</h3>
+      <p>The dreamer, the planner, the one who turns ordinary days into something special. Loves sunflowers, books, and dancing in the kitchen.</p>
+    </div>
+  </div>
+</section>
+
+<!-- STORY -->
+<section id="story">
+  <p class="section-label reveal">How It Began</p>
+  <h2 class="section-title reveal">Our Love Story</h2>
+  <div class="timeline reveal">
+    <div class="t-item">
+      <div class="t-dot"></div>
+      <p class="date">June 2019</p>
+      <h3>First Meeting</h3>
+      <p>We met by chance at a mutual friend's birthday party and talked until the lights came on.</p>
+    </div>
+    <div class="t-item">
+      <div class="t-dot"></div>
+      <p class="date">March 2021</p>
+      <h3>First Trip Together</h3>
+      <p>A weekend in the mountains turned into the realization that home is wherever we are together.</p>
+    </div>
+    <div class="t-item">
+      <div class="t-dot"></div>
+      <p class="date">August 2024</p>
+      <h3>The Proposal</h3>
+      <p>On a quiet beach at sunset, Kushan got down on one knee — and Oshika said yes before he even finished the question.</p>
+    </div>
+    <div class="t-item">
+      <div class="t-dot"></div>
+      <p class="date">July 2026</p>
+      <h3>The Wedding</h3>
+      <p>The next chapter begins — and we can't wait to celebrate it with the people we love most.</p>
+    </div>
+  </div>
+  <p class="quote reveal">"Two hearts, one soul, one beautiful journey begins forever."</p>
+</section>
+
+<!-- GALLERY -->
+<section id="gallery">
+  <p class="section-label reveal">Captured Moments</p>
+  <h2 class="section-title reveal">Photo Gallery</h2>
+  <div class="gallery reveal">
+    <figure><img src="images/Gallery-1.jpg"><figcaption>Golden hour together</figcaption></figure>
+    <figure><img src="images/Gallery-2.jpg"><figcaption>Hand in hand</figcaption></figure>
+    <figure><img src="images/Gallery-3.jpg"><figcaption>Forever begins here</figcaption></figure>
+    <figure><img src="images/Gallery-4.jpg"><figcaption>Just us</figcaption></figure>
+    <figure><img src="images/Gallery-5.jpg"><figcaption>Walking into forever</figcaption></figure>
+    <figure><img src="images/Gallery-6.jpg"><figcaption>The promise</figcaption></figure>
+    <figure><img src="images/Gallery-7.jpg"><figcaption>The promise</figcaption></figure>
+    <figure><img src="images/Gallery-8.jpg"><figcaption>The promise</figcaption></figure>
+  </div>
+</section>
+
+<!-- DETAILS -->
+<section id="details">
+  <p class="section-label reveal">Join Us</p>
+  <h2 class="section-title reveal">Wedding Details</h2>
+  <div class="card reveal">
+    <h2>💒 Ceremony & Reception</h2>
+    <div class="details-grid">
+      <div class="detail-box">
+        <div class="icon">📅</div>
+        <h3>Date</h3>
+        <p>Friday, July 31, 2026</p>
+      </div>
+      <div class="detail-box">
+        <div class="icon">⏰</div>
+        <h3>Time</h3>
+        <p>From 6:00 PM to 11:00 PM</p>
+      </div>
+      <div class="detail-box">
+        <div class="icon">📍</div>
+        <h3>Venue</h3>
+        <p>Ligness Green Odyssey</p>
+      </div>
+      <div class="detail-box">
+        <div class="icon">👗</div>
+        <h3>Dress Code</h3>
+        <p>Formal Attire<br>Blush & Gold tones welcome</p>
+      </div>
+    </div>
+    <a class="btn outline" href="#map">View Location</a>
+  </div>
+</section>
+
+<!-- RSVP section removed -->
+
+<!-- FAQ -->
+<section id="faq">
+  <p class="section-label reveal">Good To Know</p>
+  <h2 class="section-title reveal">Frequently Asked Questions</h2>
+  <div class="faq reveal">
+    <div class="faq-item">
+      <div class="faq-q">Can I bring a plus one? <span class="plus">+</span></div>
+      <div class="faq-a">Please refer to your invitation for the exact number of guests reserved in your honor.</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q">Is there parking at the venue? <span class="plus">+</span></div>
+      <div class="faq-a">Yes, Ligness Green Odyssey offers complimentary valet parking for all our guests.</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q">Are kids welcome? <span class="plus">+</span></div>
+      <div class="faq-a">We love your little ones, but our celebration will be an adults-only affair. Thank you for understanding!</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q">What should I wear? <span class="plus">+</span></div>
+      <div class="faq-a">Formal attire is requested. Soft blush and gold tones are encouraged but not required.</div>
+    </div>
+  </div>
+</section>
+
+<!-- MAP -->
+<section id="map">
+  <p class="section-label reveal">Find Us</p>
+  <h2 class="section-title reveal">Venue Location</h2>
+  <div class="map-wrap reveal">
+    <iframe src="https://maps.google.com/maps?q=Ligness%20Green%20Odyssey&t=&z=13&ie=UTF8&iwloc=&output=embed" allowfullscreen loading="lazy"></iframe>
+  </div>
+</section>
+
+<!-- THANK YOU -->
+<section>
+  <p class="section-label reveal">With Love</p>
+  <h2 class="section-title reveal">Thank You</h2>
+  <p class="section-sub reveal">Your love, prayers and blessings mean everything to us. We can't wait to celebrate together and begin this beautiful new chapter surrounded by the people we cherish most.</p>
+</section>
+
+<footer>
+  <div class="foot-names">Kushan & Oshika</div>
+  <p class="foot-sub">JULY 31 · 2026</p>
+  <p class="copyright">Made with ❤️ for Our Wedding</p>
+</footer>
+
+<!-- LIGHTBOX -->
+<div class="lightbox" id="lightbox">
+  <span class="lightbox-close" id="lbClose">&times;</span>
+  <span class="lightbox-nav prev" id="lbPrev">&#10094;</span>
+  <img src="" id="lbImg" alt="">
+  <span class="lightbox-nav next" id="lbNext">&#10095;</span>
+</div>
+
+<script>
+/* Preloader */
+window.addEventListener("load",()=>{
+  setTimeout(()=>document.getElementById("preloader").classList.add("hide"),500);
+});
+
+/* Navbar scroll state */
+const nav=document.getElementById("navbar");
+window.addEventListener("scroll",()=>{
+  nav.classList.toggle("scrolled", window.scrollY>60);
+});
+
+/* Reveal on scroll */
+const revealEls=document.querySelectorAll(".reveal");
+const observer=new IntersectionObserver((entries)=>{
+  entries.forEach(e=>{
+    if(e.isIntersecting) e.target.classList.add("visible");
+  });
+},{threshold:.15});
+revealEls.forEach(el=>observer.observe(el));
+
+/* Countdown */
+const wedding=new Date("July 31, 2026 18:00:00").getTime();
+setInterval(()=>{
+  const now=new Date().getTime();
+  const gap=wedding-now;
+  const day=Math.max(0,Math.floor(gap/(1000*60*60*24)));
+  const hour=Math.max(0,Math.floor((gap%(1000*60*60*24))/(1000*60*60)));
+  const minute=Math.max(0,Math.floor((gap%(1000*60*60))/(1000*60)));
+  const second=Math.max(0,Math.floor((gap%(1000*60))/1000));
+  document.getElementById("days").innerHTML=day;
+  document.getElementById("hours").innerHTML=hour;
+  document.getElementById("minutes").innerHTML=minute;
+  document.getElementById("seconds").innerHTML=second;
+},1000);
+
+/* Floating hearts */
+const hearts=document.querySelector(".hearts");
+for(let i=0;i<35;i++){
+  let heart=document.createElement("div");
+  heart.className="heart";
+  heart.innerHTML="❤";
+  heart.style.left=Math.random()*100+"%";
+  heart.style.animationDuration=(6+Math.random()*8)+"s";
+  heart.style.fontSize=(14+Math.random()*22)+"px";
+  heart.style.animationDelay=Math.random()*8+"s";
+  hearts.appendChild(heart);
+}
+
+/* Music toggle */
+const musicBtn=document.getElementById("musicBtn");
+const bgMusic=document.getElementById("bgMusic");
+let playing=false;
+musicBtn.addEventListener("click",()=>{
+  if(playing){
+    bgMusic.pause();
+    musicBtn.classList.remove("spinning");
+    musicBtn.textContent="🎵";
+  }else{
+    bgMusic.play().catch(()=>{});
+    musicBtn.classList.add("spinning");
+    musicBtn.textContent="⏸";
+  }
+  playing=!playing;
+});
+
+/* Lightbox gallery */
+const galleryImgs=[...document.querySelectorAll(".gallery img")];
+const lightbox=document.getElementById("lightbox");
+const lbImg=document.getElementById("lbImg");
+let currentIndex=0;
+
+function openLightbox(i){
+  currentIndex=i;
+  lbImg.src=galleryImgs[i].src;
+  lightbox.classList.add("active");
+}
+galleryImgs.forEach((img,i)=>img.addEventListener("click",()=>openLightbox(i)));
+document.getElementById("lbClose").addEventListener("click",()=>lightbox.classList.remove("active"));
+document.getElementById("lbNext").addEventListener("click",()=>{
+  currentIndex=(currentIndex+1)%galleryImgs.length;
+  lbImg.src=galleryImgs[currentIndex].src;
+});
+document.getElementById("lbPrev").addEventListener("click",()=>{
+  currentIndex=(currentIndex-1+galleryImgs.length)%galleryImgs.length;
+  lbImg.src=galleryImgs[currentIndex].src;
+});
+lightbox.addEventListener("click",(e)=>{ if(e.target===lightbox) lightbox.classList.remove("active"); });
+
+/* FAQ accordion */
+document.querySelectorAll(".faq-item").forEach(item=>{
+  item.querySelector(".faq-q").addEventListener("click",()=>{
+    const isOpen=item.classList.contains("open");
+    document.querySelectorAll(".faq-item").forEach(i=>i.classList.remove("open"));
+    if(!isOpen) item.classList.add("open");
+  });
+});
+
+/* RSVP handler removed */
+</script>
+
+</body>
+</html>
